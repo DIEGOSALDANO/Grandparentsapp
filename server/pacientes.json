@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nombre": "Ana",
+        "apellido": "carrascosa",
+        "edad": 67,
+        "contacto": 115648978,
+        "cuota": 2500
+    },
+    {
+        "id": 2,
+        "nombre": "Pedro",
+        "apellido": "Martola",
+        "edad": 78,
+        "contacto": 11234567,
+        "cuota": 2500
+    },
+    {
+        "id": 3,
+        "nombre": "Marta",
+        "apellido": "Tapia",
+        "edad": 88,
+        "contacto": 11897876,
+        "cuota": 2500
+    },
+    {
+        "id": 4,
+        "nombre": "Magdalena",
+        "apellido": "Lozada",
+        "edad": 99,
+        "contacto": 1245665890,
+        "cuota": 2500
+    },
+    {
+        "id": 5,
+        "nombre": "Pepe",
+        "apellido": "Parada",
+        "edad": 64,
+        "contacto": 114787578,
+        "cuota": 2500
+    }
+]
