@@ -56,14 +56,14 @@
 
       <!-- Nav Item - Tabla de internos -->
       <li class="nav-item">
-        <a class="nav-link" href="/server/views/pacientes.handlebars">
+        <a class="nav-link" href="/pacientes">
           <i class="fas fa-user-friends"></i>
           <span>Internos</span></a>
       </li>
 
-      <!---- Activity-->
+      <!-- Activity-->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/server/views/prueba.handlebars" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
           <span>Actividades</span>
         </a>
@@ -344,7 +344,9 @@
 
             <!---Aqui va el contenido dinamico de las pestañas-->
 
-          
+          {{body}}
+
+
         </div>
         <!-- /.container-fluid -->
 

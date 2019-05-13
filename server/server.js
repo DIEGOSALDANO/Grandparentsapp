@@ -6,7 +6,19 @@
   const expressSession = require('express-session');
   const exphbs = require('express-handlebars');
 
-  //iniciar en index donde debemos loguear
+  // Handlebars por default, layout main base y 
+  //  otros layouts que hubiera
+  app.engine('handlebars', exphbs({
+    defaultLayout: 'main',
+    layoutsDir: path.join(__dirname, '../views/layout')
+  }));
+
+  // Acá seteamos como motor de renderizado de vistas "handlebars"
+  app.set('view engine', 'handlebars')
+  // Y acá seteamos la carpeta para las vistas
+  app.set('views', path.join(__dirname, './views'));
+
+   //iniciar loguin
 
   //Rutas estáticas
   app.use(express.static(path.join(__dirname, '../public')));
@@ -21,6 +33,8 @@
 
   });
 
+  //condiciones de login
+  
   // JS propios
   const login = require('./login');
 
@@ -46,7 +60,7 @@
       if (login.validarUsuario(req.body.user, req.body.password)) {
         // Si validó bien, guardo la sesión y voy al home
         req.session.userId = req.body.user;
-        res.redirect('./home.html');
+        res.redirect('home');
       } else {
         // Si validó mal, destruyo la sesión (por si la hubiera) y recargo página inicial
         req.session.destroy();
@@ -61,21 +75,6 @@
     
   });
 
-  // GET /home
-  app.get('/home.html', (req, res) => {
-
-    // Cuando quiere ir a home, valido sesión.
-    if (req.session.userId !== undefined) {
-      // Responde con la página home.html
-      res.sendFile(path.join(__dirname, '../home.html'));
-    } else {
-      // Si mi usuarix tipeó "localhost:3000/home" en la barra de direcciones del navegador y
-      // no tenía una sesión activa, lo redirijo a la página que tiene el login.
-      res.redirect("/");
-    }
-
-  });
-
   // GET logout
   app.get('/logout', (req, res) => {
 
@@ -85,66 +84,35 @@
 
   });
 
-
-  //validar login
-
-  //ingresar a home
-
-  //crear rutas para botones de pestaña sidebar
-
-
-  //Server iniciado en puerto 3000
-  app.listen(3000, function () {
-    console.log('Escuchando puerto 3000 con Express');
-  });
-
-  // Enviamos el archivo index.html
-
-  // // Configuramos vistas con Handlebars
-
-  // // Acá indicamos el motor, layout (base) default y carpeta de
-  // // ese y otros layouts que hubiera
-  // app.engine('handlebars', exphbs({
-  //   defaultLayout: 'main',
-  //   layoutsDir: path.join(__dirname, 'views/layout')
-  // }));
-
-  // // Acá seteamos como motor de renderizado de vistas "handlebars"
-  // app.set('view engine', 'handlebars')
-  // // Y acá seteamos la carpeta para las vistas
-  // app.set('views', path.join(__dirname, 'views'));
-
+    // GET al raíz, renderiza un HTML
+    app.get('main', (req, res) => {
+      res.redirect('/home');
+    });
+  
   // // GET al raíz, renderiza un HTML
   // app.get('/', (req, res) => {
   //     res.render('/main');
   // });
 
+  // // GET al raíz, renderiza un HTML
+  // app.get('/main', (req, res) => {
+  //   res.render('/prueba');
+  // });
+
+  // // GET a pacientes, renderiza pacientes.handlebars
+  // app.get('/pacientes', (req, res) => {
+  //   res.render('pacientes');
+  // });
+
+  // app.get('/prueba', function (req, res) {
+  // console.log("get a /prueba");
+  // res.render('prueba');
+  // });
+  
 
 
-
-
-  // // // Configuramos vistas con Handlebars
-
-  // // // Acá indicamos el motor, layout (base) default y carpeta de
-  // // // ese y otros layouts que hubiera
-  // // app.engine('handlebars', exphbs({
-  // //   defaultLayout: 'home.handlebars',
-  // //   layoutsDir: path.join(__dirname, 'views/layout')
-  // // }));
-  // // // Acá seteamos como motor de renderizado de vistas "handlebars"
-  // // app.set('view engine', 'handlebars')
-  // // // Y acá seteamos la carpeta para las vistas
-  // // app.set('views', path.join(__dirname, 'views'));
-
-
-  // // // GET al raíz, renderiza un HTML
-  // // app.get('/', (req, res) => {
-  // //     res.redirect('/home.handlebars');
-  // // });
-
-  // // GET a home, renderiza un HTML
-  // app.get('/home', (req, res) => {
-  //   res.render('home', {
-  //       title: 'Mi app HBS - Home'
-  //   });
+    //Server iniciado en puerto 3000
+  app.listen(3000, function () {
+    console.log('Escuchando puerto 3000 con Express');
+  });
   
