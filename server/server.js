@@ -10,13 +10,13 @@
   //  otros layouts que hubiera
   app.engine('handlebars', exphbs({
     defaultLayout: 'main',
-    layoutsDir: path.join(__dirname, '../views/layout')
+    layoutsDir: path.join(__dirname, '/views/layouts')
   }));
 
   // Acá seteamos como motor de renderizado de vistas "handlebars"
   app.set('view engine', 'handlebars')
   // Y acá seteamos la carpeta para las vistas
-  app.set('views', path.join(__dirname, './views'));
+  app.set('views', path.join(__dirname, '/views'));
 
    //iniciar loguin
 
@@ -60,7 +60,7 @@
       if (login.validarUsuario(req.body.user, req.body.password)) {
         // Si validó bien, guardo la sesión y voy al home
         req.session.userId = req.body.user;
-        res.redirect('home');
+        res.redirect('/home');
       } else {
         // Si validó mal, destruyo la sesión (por si la hubiera) y recargo página inicial
         req.session.destroy();
@@ -84,10 +84,10 @@
 
   });
 
-    // GET al raíz, renderiza un HTML
-    app.get('main', (req, res) => {
-      res.redirect('/home');
-    });
+  // GET al raíz, renderiza un HTML
+  app.get('/home', (req, res) => {
+    res.render('home');
+  });
   
   // // GET al raíz, renderiza un HTML
   // app.get('/', (req, res) => {
@@ -99,17 +99,25 @@
   //   res.render('/prueba');
   // });
 
-  // // GET a pacientes, renderiza pacientes.handlebars
-  // app.get('/pacientes', (req, res) => {
-  //   res.render('pacientes');
-  // });
+  // GET a pacientes, renderiza pacientes.handlebars
+  app.get('/pacientes', (req, res) => {
+    res.render('pacientes');
+  });
 
-  // app.get('/prueba', function (req, res) {
-  // console.log("get a /prueba");
-  // res.render('prueba');
-  // });
+  //Get de calendario
+  app.get('/calendario', function (req, res) {
+  res.render('calendario');
+  });
+
+  //Get de estadisticas
+  app.get('/estadisticas', function (req, res) {
+  res.render('estadisticas');
+  });
   
-
+  //Get de estadisticas
+  app.get('/caja', function (req, res) {
+    res.render('caja');
+    });
 
     //Server iniciado en puerto 3000
   app.listen(3000, function () {
